@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block headers %}
+    <title>{% block title %}{% block subtitle '' %} &mdash; KnpRadBundle{% endblock %}</title>
+    <meta name="description" content="{% block description '' %}">
+{% endblock headers %}
+
+{% block body %}
+    <div class="container-fluid">
+        {% block content '' %}
+    </div>
+{% endblock %}
