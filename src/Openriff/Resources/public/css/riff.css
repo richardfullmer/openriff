@@ -1,0 +1,38 @@
+body {
+    padding-top: 71px;
+}
+
+/* Navbar niceness */
+.openriff-nav {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+  background-color: #00334F;
+  border-color: #00283E;
+  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+.openriff-nav .navbar-collapse {
+  border-color: #00283E;
+}
+.openriff-nav .navbar-brand {
+  color: #fff;
+}
+.openriff-nav .navbar-nav > li > a {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  color: #00517E;
+}
+.openriff-nav .navbar-nav > li > a:hover {
+  color: #fff;
+  background-color: #00517E;
+}
+.openriff-nav .navbar-nav > .active > a,
+.openriff-nav .navbar-nav > .active > a:hover {
+  color: #00517E;
+  background-color: #00283E;
+}
+.openriff-nav .navbar-toggle {
+  border-color: #563d7c;
+}
+.openriff-nav .navbar-toggle:hover {
+  background-color: #00283E;
+  border-color: #00283E;
+}

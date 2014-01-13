@@ -6,5 +6,6 @@ app/logs
 web/bundles
 web/css
 web/js
+web/components
 vendor
 bin

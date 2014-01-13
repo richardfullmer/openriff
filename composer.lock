@@ -3,8 +3,143 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "aa27dbcd7b3863cc79c9d706ef1eb82d",
+    "hash": "4b9650e99a1352521f6f58da43ae1696",
     "packages": [
+        {
+            "name": "components/angular.js",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/angular.js.git",
+                "reference": "ee11cfb1a953d213b78881ee072e367002352b09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/angular.js/zipball/ee11cfb1a953d213b78881ee072e367002352b09",
+                "reference": "ee11cfb1a953d213b78881ee072e367002352b09",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "name": "angularjs",
+                    "scripts": [
+                        "angular.js"
+                    ],
+                    "files": [
+                        "angular.min.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Shim repository for Angular.js",
+            "homepage": "http://angularjs.org",
+            "time": "2013-11-12 02:38:20"
+        },
+        {
+            "name": "components/bootstrap",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/bootstrap.git",
+                "reference": "ed686e60f966ba415e34f8825fad454993afac4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/ed686e60f966ba415e34f8825fad454993afac4b",
+                "reference": "ed686e60f966ba415e34f8825fad454993afac4b",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.9"
+            },
+            "suggest": {
+                "components/bootstrap-default": "Provide a theme for Bootstrap as components/bootstrap only provides the CSS as file assets"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "js/bootstrap.js"
+                    ],
+                    "files": [
+                        "js/bootstrap.min.js",
+                        "css/*.css",
+                        "fonts/*",
+                        "less/*"
+                    ],
+                    "shim": {
+                        "deps": [
+                            "jquery"
+                        ]
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Twitter, Inc"
+                }
+            ],
+            "description": "Sleek, intuitive, and powerful front-end framework for faster and easier web development.",
+            "homepage": "http://twitter.github.com/bootstrap/",
+            "keywords": [
+                "bootstrap",
+                "css"
+            ],
+            "time": "2013-12-08 11:53:27"
+        },
+        {
+            "name": "components/jquery",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "452a56b52b8f4a032256cdb8b6838f25f0bdb3d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/452a56b52b8f4a032256cdb8b6838f25f0bdb3d2",
+                "reference": "452a56b52b8f4a032256cdb8b6838f25f0bdb3d2",
+                "shasum": ""
+            },
+            "require": {
+                "robloach/component-installer": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery-migrate.js",
+                        "jquery-migrate.min.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Resig",
+                    "email": "jeresig@gmail.com",
+                    "homepage": "http://ejohn.org/"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2013-07-12 08:48:34"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.1.2",
@@ -1230,6 +1365,50 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "robloach/component-installer",
+            "version": "0.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobLoach/component-installer.git",
+                "reference": "1864f25db21fc173e02a359f646acd596c1b0460"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobLoach/component-installer/zipball/1864f25db21fc173e02a359f646acd596c1b0460",
+                "reference": "1864f25db21fc173e02a359f646acd596c1b0460",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/assetic": "1.*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "composer/composer": "1.*"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "ComponentInstaller\\Installer"
+            },
+            "autoload": {
+                "psr-0": {
+                    "ComponentInstaller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Loach",
+                    "email": "robloach@gmail.com",
+                    "homepage": "http://robloach.net"
+                }
+            ],
+            "description": "Allows installation of Components via Composer.",
+            "time": "2013-08-31 23:46:48"
         },
         {
             "name": "sensio/distribution-bundle",

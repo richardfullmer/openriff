@@ -24,7 +24,9 @@
         "symfony/assetic-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "~2.1@dev",
         "doctrine/data-fixtures": "~1.0@dev",
-        "mopa/bootstrap-bundle": "~2.3@dev"
+        "mopa/bootstrap-bundle": "~2.3@dev",
+        "components/bootstrap": "~3.0",
+        "components/angular.js": "*"
     },
     "require-dev": {
         "behat/behat": "~3@dev",
@@ -34,7 +36,8 @@
         "phpspec/phpspec": "~2@dev"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/components"
     },
     "autoload": {
         "psr-0": { "": "src/", "Context": "features/" }
