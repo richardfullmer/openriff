@@ -1,5 +1,9 @@
 body {
-    padding-top: 71px;
+    padding-top: 51px;
+}
+
+.main {
+    padding-top: 20px;
 }
 
 /* Navbar niceness */
@@ -35,4 +39,16 @@ body {
 .openriff-nav .navbar-toggle:hover {
   background-color: #00283E;
   border-color: #00283E;
+}
+
+.play-control {
+    /*border-right: 1px solid #00283E;*/
+}
+.play-control .progress {
+    margin-bottom: 0;
+}
+
+.queue-item {
+    border-top: 1px solid #00283E;
+    /*border-right: 1px solid #00283E;*/
 }

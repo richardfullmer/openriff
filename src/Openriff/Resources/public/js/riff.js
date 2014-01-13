@@ -5,8 +5,10 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
     $scope.playing = null;
     $scope.sound = null;
 
+    $scope.queue = [];
+
     $scope.search = function() {
-        SC.get("/tracks", {'q': $scope.q }, function(tracks) {
+        SC.get("/tracks", {'q': $scope.q, 'filter': 'streamable'}, function(tracks) {
             $scope.search_results = tracks;
             $scope.$apply();
         });
@@ -14,24 +16,51 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
 
     $scope.select = function(track) {
         console.log(track);
+        $scope.queue.push(track);
+
+        if ($scope.queue.length == 1 && $scope.playing == null) {
+            $scope.playNext();
+        }
+    };
+
+    $scope.toggleMute = function() {
+        $scope.sound.toggleMute();
+    };
+
+    $scope.voteDown = function(track) {
+        console.log('downvote');
+        console.log(track);
+        if (track == $scope.playing) {
+            $scope.playNext();
+        } else {
+            for (var i = $scope.queue.length; i--;) {
+                if ($scope.queue[i] === track) {
+                    $scope.queue.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    };
+
+    $scope.playNext = function() {
         if ($scope.sound) {
             $scope.sound.stop();
         }
-        $scope.playing = track;
-        SC.stream("/tracks/" + track.id, function(sound) {
-            if ($scope.sound == null) {
-                sound.play();
-            }
-            $scope.sound = sound;
-            $scope.$apply();
-        });
-    };
+        if ($scope.queue.length > 0) {
+            $scope.playing = $scope.queue.shift();
+            console.log($scope.playing);
 
-    $scope.play = function() {
-        $scope.sound.play();
-    };
-
-    $scope.pause = function() {
-        $scope.sound.pause();
-    };
+            SC.stream("/tracks/" + $scope.playing.id, function(sound) {
+                sound.play({
+                    whileplaying: function() {
+                        $scope.$apply();
+                    },
+                    onfinish: function() {
+                        $scope.playNext();
+                    }
+                });
+                $scope.sound = sound;
+            });
+        }
+    }
 }]);

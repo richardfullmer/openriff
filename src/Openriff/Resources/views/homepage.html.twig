@@ -1,6 +1,6 @@
 {% extends 'App::layout.html.twig' %}
 
-{% block subtitle 'Homepage' %}
+{% block subtitle 'Open Riff' %}
 
 {% block head_javascripts %}
 <script src="{{ asset('components/angularjs/angular.min.js')}}"></script>
@@ -10,20 +10,58 @@
 
 {% block content %}
     <div class="row" ng-controller="PlayCtrl">
-        <div class="col-md-2">
-            <div class="play-control affix">
-                <p>{% verbatim %}{{ playing.title }}{% endverbatim %}</p>
+        <div class="col-md-3">
+            <div class="play-control" style="background-color: #ececec">
+                <div class="media-item media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ playing.artwork_url }}{% endverbatim %}" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{% verbatim %}{{ playing.title }}{% endverbatim %}</h4>
 
-                <img class="img-polaroid" src="{% verbatim %}{{ playing.artwork_url }}{% endverbatim %}" />
-                <br />
+                        <button class="btn btn-{% verbatim %}{{ sound.muted ? 'danger' : 'success' }}{% endverbatim %} btn-sm" ng-click="toggleMute()">
+                            <i class="glyphicon glyphicon-headphones"></i>
+                        </button>
 
-                <button class="btn btn-default btn-mini"><i class="glyphicon glyphicon-backward"></i> </button>
-                <button class="btn btn-default btn-mini" ng-click="pause()"><i class="glyphicon glyphicon-pause"></i> </button>
-                <button class="btn btn-default btn-mini" ng-click="play()"><i class="glyphicon glyphicon-play"></i> </button>
-                <button class="btn btn-default btn-mini"><i class="glyphicon glyphicon-forward"></i> </button>
+                        <span class="timer">
+                            {% verbatim %}{{ sound.position / 1000 | number:0 }} / {{ playing.duration / 1000 | number:0 }}{% endverbatim %} seconds
+                        </span>
+
+                        <div class="btn-group  pull-right" style="padding-right: 5px;">
+                            <button class="btn btn-success btn-xs" ng-click="voteUp(playing)"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+                            <button class="btn btn-danger btn-xs" ng-click="voteDown(playing)"><i class="glyphicon glyphicon-thumbs-down"></i> </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{% verbatim %}{{ sound.position * 100 / playing.duration }}{% endverbatim %}" aria-valuemin="0" aria-valuemax="100" style="width: {% verbatim %}{{ sound.position * 100 / playing.duration }}{% endverbatim %}%;">
+                        <span class="sr-only">{% verbatim %}{{ sound.position * 100 / playing.duration }}{% endverbatim %}% Complete</span>
+                        <img src="{% verbatim %}{{ playing.waveform_url }}{% endverbatim %}" style="height: 20px; width: 100%;" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="queue-item" ng-repeat="item in queue"  style="background-color: #ececec">
+                <div class="media-item media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ item.artwork_url }}{% endverbatim %}" />
+                    </a>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">{% verbatim %}{{ item.title }}{% endverbatim %}</h4>
+                        {% verbatim %}{{ item.duration / 1000 | number:0 }}{% endverbatim %} seconds
+                        <div class="btn-group  pull-right" style="padding-right: 5px;">
+                            <button class="btn btn-success btn-xs" ng-click="voteUp(item)"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+                            <button class="btn btn-danger btn-xs" ng-click="voteDown(item)"><i class="glyphicon glyphicon-thumbs-down"></i> </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9 main">
             <form class="form-inline" ng-submit="search()">
                 <input type="text" class="form-control" ng-model="q" placeholder="Search for your favorite song...">
             </form>
@@ -43,8 +81,12 @@
                         <p>{% verbatim %}{{ result.description }}{% endverbatim %}</p>
                         <img src="{% verbatim %}{{ result.waveform_url }}{% endverbatim %}" style="height: 60px; width: 100%; background-color: #00283E;" />
                         <p>
-                            <button class="btn btn-default btn-mini" ng-click="select(result)"><i class="glyphicon glyphicon-plus"></i> Add to queue</button>
-                            <a class="btn btn-default btn-mini" target="_blank" href="{% verbatim %}{{ result.permalink_url }}{% endverbatim %}"><i class="glyphicon glyphicon-headphones"></i> Listen on soundcloud</a>
+                            <button ng-if="result.streamable" title="Add to queue" class="btn btn-default btn-sm" ng-click="select(result)">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                            <a class="btn btn-default btn-sm pull-right" title="Listen on soundcloud" target="_blank" href="{% verbatim %}{{ result.permalink_url }}{% endverbatim %}">
+                                <i class="glyphicon glyphicon-headphones"></i>
+                            </a>
                         </p>
                     </td>
                 </tr>
