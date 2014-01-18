@@ -14,13 +14,13 @@
             <div class="play-control" style="background-color: #ececec">
                 <div class="media-item media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ playing.artwork_url }}{% endverbatim %}" />
+                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ playing.artwork_url ? playing.artwork_url : playing.user.avatar_url }}{% endverbatim %}" />
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{% verbatim %}{{ playing.title }}{% endverbatim %}</h4>
 
                         <button class="btn btn-{% verbatim %}{{ sound.muted ? 'danger' : 'success' }}{% endverbatim %} btn-sm" ng-click="toggleMute()">
-                            <i class="glyphicon glyphicon-headphones"></i>
+                            <i class="glyphicon glyphicon-music"></i>
                         </button>
 
                         <input type="range" min="1" max="100" ng-model="level" ng-change="setVolume(level)">
@@ -49,7 +49,7 @@
             <div class="queue-item" ng-repeat="item in queue"  style="background-color: #ececec">
                 <div class="media-item media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ item.artwork_url }}{% endverbatim %}" />
+                        <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ item.artwork_url ? item.artwork_url : item.user.avatar_url }}{% endverbatim %}" />
                     </a>
 
                     <div class="media-body">
@@ -70,25 +70,40 @@
             <table class="table">
                 <tr ng-repeat="result in search_results">
                     <td style="width: 120px;">
-                        <img class="img-polaroid" src="{% verbatim %}{{ result.artwork_url }}{% endverbatim %}" />
+                        <img class="img-polaroid" src="{% verbatim %}{{ result.artwork_url ? result.artwork_url : result.user.avatar_url }}{% endverbatim %}" />
                     </td>
                     <td>
                         <h4>
                             <span class="pull-right">
-                                <small>{% verbatim %}{{ result.streamable }}{% endverbatim %}</small>
+                                <small><i class="glyphicon glyphicon-user"></i> {% verbatim %}{{ result.user.username }}{% endverbatim %}</small>
                             </span>
                             {% verbatim %}{{ result.title }}{% endverbatim %}
-                            <small>{% verbatim %}{{ result.duration }} seconds{% endverbatim %}</small>
+                            <small>{% verbatim %}{{ result.duration / 1000 | number:0 }} seconds{% endverbatim %}</small>
                         </h4>
                         <p>{% verbatim %}{{ result.description }}{% endverbatim %}</p>
                         <img src="{% verbatim %}{{ result.waveform_url }}{% endverbatim %}" style="height: 60px; width: 100%; background-color: #00283E;" />
-                        <p>
-                            <button ng-if="result.streamable" title="Add to queue" class="btn btn-default btn-sm" ng-click="select(result)">
-                                <i class="glyphicon glyphicon-plus"></i>
+                        <p style="margin-top: 10px;">
+                            <button ng-if="result.streamable" title="Add to queue" class="btn btn-default btn-xs" ng-click="select(result)">
+                                <i class="glyphicon glyphicon-plus"></i> Add
                             </button>
-                            <a class="btn btn-default btn-sm pull-right" title="Listen on soundcloud" target="_blank" href="{% verbatim %}{{ result.permalink_url }}{% endverbatim %}">
-                                <i class="glyphicon glyphicon-headphones"></i>
+                            <a class="btn btn-default btn-xs" title="Listen on soundcloud" target="_blank" href="{% verbatim %}{{ result.permalink_url }}{% endverbatim %}">
+                                <i class="glyphicon glyphicon-headphones"></i> Soundcloud
                             </a>
+
+                            <span class="pull-right">
+                                <span title="Favorites">
+                                    <i class="glyphicon glyphicon-heart"></i> {% verbatim %}{{ result.favoritings_count }}{% endverbatim %} |
+                                </span>
+                                <span title="Playbacks">
+                                    <i class="glyphicon glyphicon-play"></i> {% verbatim %}{{ result.playback_count }}{% endverbatim %} |
+                                </span>
+                                <span title="Comments">
+                                    <i class="glyphicon glyphicon-comment"></i> {% verbatim %}{{ result.comment_count }}{% endverbatim %} |
+                                </span>
+                                <span title="Downloads">
+                                    <i class="glyphicon glyphicon-download"></i> {% verbatim %}{{ result.download_count }}{% endverbatim %}
+                                </span>
+                            </span>
                         </p>
                     </td>
                 </tr>
