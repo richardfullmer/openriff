@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row" ng-controller="PlayCtrl">
+    <div class="row">
         <div class="col-md-3">
             <div class="play-control" style="background-color: #ececec">
                 <div class="media-item media">
@@ -102,6 +102,9 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            var soundloud_user_id = '{{ app.user.soundcloudId }}';
+        {% endif %}
         SC.initialize({
             client_id: '{{ soundcloud_client_id }}'
         });

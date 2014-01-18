@@ -14,6 +14,13 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
         });
     };
 
+    $scope.favorites = function() {
+        SC.get("/users/" + soundloud_user_id + "/favorites", function(tracks) {
+            $scope.search_results = tracks;
+            $scope.$apply();
+        });
+    };
+
     $scope.select = function(track) {
         console.log(track);
         $scope.queue.push(track);
