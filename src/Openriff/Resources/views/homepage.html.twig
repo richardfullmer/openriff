@@ -23,7 +23,7 @@
                             <i class="glyphicon glyphicon-music"></i>
                         </button>
 
-                        <input type="range" min="1" max="100" ng-model="level" ng-change="setVolume(level)">
+                        <input type="range" min="1" max="100" ng-model="level" ng-change="setVolume(level)" />
 
                         <span class="timer">
                             {% verbatim %}{{ sound.position / 1000 | number:0 }} / {{ playing.duration / 1000 | number:0 }}{% endverbatim %} seconds
@@ -46,7 +46,7 @@
 
             </div>
 
-            <div class="queue-item" ng-repeat="item in queue"  style="background-color: #ececec">
+            <div class="queue-item" ng-repeat="item in queue" style="background-color: #ececec">
                 <div class="media-item media">
                     <a class="pull-left" href="#">
                         <img class="media-object" style="height: 70px;" src="{% verbatim %}{{ item.artwork_url ? item.artwork_url : item.user.avatar_url }}{% endverbatim %}" />
@@ -55,7 +55,7 @@
                     <div class="media-body">
                         <h4 class="media-heading">{% verbatim %}{{ item.title }}{% endverbatim %}</h4>
                         {% verbatim %}{{ item.duration / 1000 | number:0 }}{% endverbatim %} seconds
-                        <div class="btn-group  pull-right" style="padding-right: 5px;">
+                        <div class="btn-group pull-right" style="padding-right: 5px;">
                             <button class="btn btn-success btn-xs" ng-click="voteUp(item)"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
                             <button class="btn btn-danger btn-xs" ng-click="voteDown(item)"><i class="glyphicon glyphicon-thumbs-down"></i> </button>
                         </div>
@@ -118,7 +118,7 @@
     {{ parent() }}
     <script>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            var soundloud_user_id = '{{ app.user.soundcloudId }}';
+            var soundcloud_user_id = '{{ app.user.soundcloudId }}';
         {% endif %}
         SC.initialize({
             client_id: '{{ soundcloud_client_id }}'

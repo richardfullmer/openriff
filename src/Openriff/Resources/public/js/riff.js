@@ -15,7 +15,7 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
     };
 
     $scope.favorites = function() {
-        SC.get("/users/" + soundloud_user_id + "/favorites", function(tracks) {
+        SC.get("/users/" + soundcloud_user_id + "/favorites", function(tracks) {
             $scope.search_results = tracks;
             $scope.$apply();
         });
