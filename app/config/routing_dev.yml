@@ -14,5 +14,9 @@ _knp_rad_assistant:
     resource: "@KnpRadBundle/Resources/config/routing/assistant.xml"
     prefix:   /_assistant
 
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
 _main:
     resource: routing.yml

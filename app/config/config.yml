@@ -72,3 +72,24 @@ hwi_oauth:
     resource_owners:
         soundcloud:
             service: openriff_oauth.resource_owner.soundcloud
+
+fos_rest:
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.jsontoform
+    body_converter:
+        enabled: true
+
+lopi_pusher:
+    app_id: %pusher.app_id%
+    key:    %pusher.key%
+    secret: %pusher.secret%
+
+    # Default configuration
+    debug: %kernel.debug% # true if you want use the debug of all requests
+    host: http://api.pusherapp.com
+    port: 80
+    timeout: 30
+
+    # Optional configuration
+#    auth_service_id: <the_auth_service_id> # optional if you want to use private or presence channels

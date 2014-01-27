@@ -6,7 +6,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Richard Fullmer <richard.fullmer@opensoftdev.com>
+ * @author Richard Fullmer <richardfullmer@gmail.com>
  */
 class SoundcloudResourceOwner extends GenericOAuth2ResourceOwner
 {

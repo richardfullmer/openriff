@@ -3,8 +3,11 @@
 {% block subtitle 'Open Riff' %}
 
 {% block head_javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ asset('components/angularjs/angular.min.js')}}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 <script src="//connect.soundcloud.com/sdk.js"></script>
+<script src="//js.pusher.com/2.1/pusher.min.js"></script>
 
 {% endblock %}
 
@@ -117,6 +120,16 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.log = function(message) {
+            if (window.console && window.console.log) {
+                window.console.log(message);
+            }
+        };
+
+        var pusher = new Pusher('10bc0dda67cbf9f88d8c');
+
+
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             var soundcloud_user_id = '{{ app.user.soundcloudId }}';
         {% endif %}

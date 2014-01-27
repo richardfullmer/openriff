@@ -1,6 +1,34 @@
 var openRiffApp = angular.module('openRiffApp', []);
 
-openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
+openRiffApp.factory('Routing', function() {
+    return Routing;
+});
+
+openRiffApp.factory('SC', function() {
+    return SC;
+});
+
+openRiffApp.factory('pusher', function($window) {
+    return $window.pusher;
+});
+
+openRiffApp.controller('PlayCtrl', ['$scope', '$http', 'Routing', 'SC', 'pusher', function($scope, $http, Routing, SC, pusher) {
+
+    var channel = pusher.subscribe('queue');
+    channel.bind('track_added', function(data) {
+        var trackId = data;
+
+        SC.get("/tracks/" + trackId, function(track) {
+            console.log(track);
+            $scope.queue.push(track);
+
+            if ($scope.queue.length == 1 && $scope.playing == null) {
+                $scope.playNext();
+            }
+        });
+    });
+
+
     $scope.search_results = null;
     $scope.playing = null;
     $scope.sound = null;
@@ -22,12 +50,7 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
     };
 
     $scope.select = function(track) {
-        console.log(track);
-        $scope.queue.push(track);
-
-        if ($scope.queue.length == 1 && $scope.playing == null) {
-            $scope.playNext();
-        }
+        $http.post(Routing.generate('api_track_add'), track);
     };
 
     $scope.toggleMute = function() {
@@ -80,8 +103,6 @@ openRiffApp.controller('PlayCtrl', ['$scope', function($scope) {
                 }
                 $scope.sound.setVolume(volume);
             });
-
         }
-
     }
 }]);

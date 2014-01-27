@@ -9,6 +9,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
@@ -19,11 +20,16 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Lopi\Bundle\PusherBundle\LopiPusherBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\RadBundle\KnpRadBundle(),
             new Openriff\App(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Nelmio\ApiDocBundle\NelmioApiDocBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }

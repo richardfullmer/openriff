@@ -1,13 +1,17 @@
 <?php
 
 namespace Openriff\Controller;
- 
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Sensio;
+
 /**
- * @author Richard Fullmer <richard.fullmer@opensoftdev.com>
+ * @author Richard Fullmer <richardfullmer@gmail.com>
  */
 class SecurityController extends Controller
 {
     /**
+     * @Sensio\Route("/logout", name="logout")
+     *
      * @throws \RuntimeException
      */
     public function logoutAction()

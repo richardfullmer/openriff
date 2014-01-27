@@ -16,3 +16,7 @@ parameters:
 
     soundcloud.client_id: ~
     soundcloud.secret:    ~
+
+    pusher.app_id: ~
+    pusher.key: ~
+    pusher.secret: ~

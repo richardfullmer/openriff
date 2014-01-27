@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * @author Richard Fullmer <richard.fullmer@opensoftdev.com>
+ * @author Richard Fullmer <richardfullmer@gmail.com>
  */
 class EntityUserProvider extends BaseEntityUserProvider implements AccountConnectorInterface, UserProviderInterface
 {

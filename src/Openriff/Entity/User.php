@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @author Richard Fullmer <richard.fullmer@opensoftdev.com>
+ * @author Richard Fullmer <richardfullmer@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="users")
